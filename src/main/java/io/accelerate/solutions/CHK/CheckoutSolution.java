@@ -17,7 +17,7 @@ public class CheckoutSolution {
             }
             var oldCount = itemCounts.putIfAbsent(item, 1);
             if (oldCount != null) {
-                itemCounts.put(item, oldCount++);
+                itemCounts.put(item, oldCount + 1);
             }
         }
         var total = 0;
@@ -40,4 +40,5 @@ public class CheckoutSolution {
 
     }
 }
+
 
