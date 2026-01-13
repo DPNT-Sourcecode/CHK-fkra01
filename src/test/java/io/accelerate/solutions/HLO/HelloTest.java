@@ -16,10 +16,12 @@ public class HelloTest {
 
   @Test
   public void helloWorld() {
-    assertEquals("Hello, World!", solution.hello(""));
+    assertEquals("Hello, World!", solution.hello("World"));
+  }
 
+  @Test
+  public void helloEden() {
+    assertEquals("Hello, Eden!", solution.hello("Eden"));
   }
 
 }
-
-
