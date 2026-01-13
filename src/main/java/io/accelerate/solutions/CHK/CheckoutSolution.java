@@ -33,24 +33,25 @@ public class CheckoutSolution {
             var count = itemCount.getValue();
             // var offer = selectOffer(item.getOffers());
             if (item.getOffers() != null) {
-
                 var offers = item.getOffers().stream()
                         .sorted((x, y) -> Integer.compare(x.multiple(), y.multiple()))
                         .collect(Collectors.toList()).reversed();
                 for (var offer : offers) {
                     var offerCount = Math.floorDiv(count, offer.multiple());
                     if (offer.sku().equals(item.getSku())) {
-                        var regularCount = (count - offerCount * offer.multiple());
                         total += offerCount * offer.finalPrice();
                     } else {
                         var relevantItem = table.getItem(offer.sku());
+                        offerCount = itemCounts.get(relevantItem.getSku()).max(offerCount);
                         total -= offerCount * relevantItem.getPrice();
                         total += offerCount * offer.finalPrice();
                     }
+                    count -= (offerCount * offer.multiple());
 
                 }
 
             }
+            total += count * item.getPrice();
         }
         return total;
 
@@ -64,4 +65,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
