@@ -12,12 +12,16 @@ public class CheckoutSolution {
         HashMap<StockItem, Integer> itemCounts = new HashMap<>();
         for (String sku : skus.split("")) {
             var item = table.getItem(sku);
+            if (item == null) {
+                return -1;
+            }
             var oldCount = itemCounts.putIfAbsent(item, 1);
             if (oldCount != null) {
                 itemCounts.put(item, oldCount++);
             }
         }
         var total = 0;
+
         for (var itemCount : itemCounts.entrySet()) {
             var item = itemCount.getKey();
             var count = itemCount.getValue();
@@ -36,5 +40,6 @@ public class CheckoutSolution {
 
     }
 }
+
 
 
