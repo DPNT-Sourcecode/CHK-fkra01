@@ -10,6 +10,9 @@ public class CheckoutSolution {
 
     public Integer checkout(String skus) {
         HashMap<StockItem, Integer> itemCounts = new HashMap<>();
+        if (skus == "") {
+            return 0;
+        }
         for (String sku : skus.split("")) {
             var item = table.getItem(sku);
             if (item == null) {
@@ -40,5 +43,6 @@ public class CheckoutSolution {
 
     }
 }
+
 
 
