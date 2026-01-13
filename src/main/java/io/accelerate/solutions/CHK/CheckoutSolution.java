@@ -13,6 +13,7 @@ public class CheckoutSolution {
         for (String sku : skus.split("")) {
             var item = table.getItem(sku);
             if (item == null) {
+                System.out.println("SKU: " + sku + " Doesnt exist");
                 return -1;
             }
             var oldCount = itemCounts.putIfAbsent(item, 1);
@@ -40,6 +41,7 @@ public class CheckoutSolution {
 
     }
 }
+
 
 
 
