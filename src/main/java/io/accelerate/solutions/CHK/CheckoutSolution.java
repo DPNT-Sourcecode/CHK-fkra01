@@ -42,7 +42,7 @@ public class CheckoutSolution {
                         total += offerCount * offer.finalPrice();
                     } else {
                         var relevantItem = table.getItem(offer.sku());
-                        offerCount = itemCounts.get(relevantItem.getSku()).max(offerCount);
+                        offerCount = Integer.max(offerCount, itemCounts.getOrDefault(relevantItem, 0));
                         total -= offerCount * relevantItem.getPrice();
                         total += offerCount * offer.finalPrice();
                     }
@@ -65,5 +65,6 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
