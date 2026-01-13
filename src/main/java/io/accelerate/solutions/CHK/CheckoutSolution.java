@@ -42,6 +42,7 @@ public class CheckoutSolution {
                     var offerCount = Math.floorDiv(count, offer.multiple());
                     if (offer.sku().equals(item.getSku())) {
                         total += offerCount * offer.finalPrice();
+                        count -= offerCount * offer.multiple();
                         total += count * item.getPrice();
                     } else {
                         var relevantItem = table.getItem(offer.sku());
@@ -75,4 +76,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
