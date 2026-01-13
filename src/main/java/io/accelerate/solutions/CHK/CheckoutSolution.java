@@ -32,14 +32,16 @@ public class CheckoutSolution {
             var count = itemCount.getValue();
             var offer = selectOffer(item.getOffers());
             if (offer != null) {
+                var offerCount = Math.floorDiv(count, offer.multiple());
                 if (offer.sku().equals(item.getSku())) {
-
-                    var offerCount = Math.floorDiv(count, offer.multiple());
                     var regularCount = (count - offerCount * offer.multiple());
                     total += offerCount * offer.finalPrice();
                     total += regularCount * item.getPrice();
                 } else {
-
+                    var relevantItem = table.getItem(offer.sku());
+                    total -= offerCount * relevantItem.getPrice();
+                    total += offerCount * offer.finalPrice();
+                    total += count * item.getPrice();
                 }
 
             } else {
@@ -56,8 +58,3 @@ public class CheckoutSolution {
     }
 
 }
-
-
-
-
-
