@@ -30,8 +30,10 @@ public class CheckoutSolution {
         for (var itemCount : itemCounts.entrySet()) {
             var item = itemCount.getKey();
             var count = itemCount.getValue();
-            var offer = selectOffer(item.getOffers());
-            if (offer != null) {
+            // var offer = selectOffer(item.getOffers());
+            var offers = item.getOffers().stream().sorted((x, y) -> Integer.compare(x.multiple(), y.multiple()));
+            if (offers != null) {
+                for (var offer: offers)
                 var offerCount = Math.floorDiv(count, offer.multiple());
                 if (offer.sku().equals(item.getSku())) {
                     var regularCount = (count - offerCount * offer.multiple());
@@ -61,4 +63,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
