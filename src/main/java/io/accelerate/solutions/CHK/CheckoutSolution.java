@@ -9,15 +9,32 @@ public class CheckoutSolution {
     private StockTable table = StockTable.defaultTable();
 
     public Integer checkout(String skus) {
-        HashMap<StockItem, Integer> itemCount = new HashMap<>();
+        HashMap<StockItem, Integer> itemCounts = new HashMap<>();
         for (String sku : skus.split("")) {
             var item = table.getItem(sku);
-            var oldCount = itemCount.putIfAbsent(item, 1);
+            var oldCount = itemCounts.putIfAbsent(item, 1);
             if (oldCount != null) {
-                itemCount.put(item, oldCount++);
+                itemCounts.put(item, oldCount++);
             }
         }
+        var total = 0;
+        for (var itemCount : itemCounts.entrySet()) {
+            var item = itemCount.getKey();
+            var count = itemCount.getValue();
+            if (item.getOffer() != null) {
+                var offerCount = Math.floorDiv(count, item.getOffer().multiple());
+                var regularCount = (count - offerCount);
+                total += offerCount * item.getOffer().finalPrice();
+                total += regularCount * item.getPrice();
+
+            } else {
+                total += count * item.getPrice();
+            }
+
+        }
+        return total;
 
     }
 }
+
 
