@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import io.accelerate.stock.StockItem;
 import io.accelerate.stock.StockTable;
+import io.accelerate.stock.*;
 
 public class CheckoutSolution {
     private StockTable table = StockTable.defaultTable();
@@ -42,7 +43,12 @@ public class CheckoutSolution {
         return total;
 
     }
+
+    private SpecialOffer selectOffer(List<SpecialOffer> offers) {
+    }
+
 }
+
 
 
 

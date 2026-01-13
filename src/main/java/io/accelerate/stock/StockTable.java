@@ -21,10 +21,11 @@ public class StockTable {
   public static StockTable defaultTable() {
     var items = List.of(
 
-        new StockItem("A", 50, new SpecialOffer(3, 130)),
-        new StockItem("B", 30, new SpecialOffer(2, 45)),
+        new StockItem("A", 50, List.of(new SpecialOffer(3, "A", 130), new SpecialOffer(5, "A", 200))),
+        new StockItem("B", 30, List.of(new SpecialOffer(2, "B", 45))),
         new StockItem("C", 20, null),
-        new StockItem("D", 15, null)
+        new StockItem("D", 15, null),
+        new StockItem("E", 40, List.of(new SpecialOffer(2, "B", 0)))
 
     );
     // Definitely cleaner ways to do this, but this isnt "production" code
@@ -36,3 +37,4 @@ public class StockTable {
 
   }
 }
+
