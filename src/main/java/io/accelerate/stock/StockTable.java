@@ -1,5 +1,6 @@
-package io.stock.accelerate;
+package io.accelerate.stock;
 
 public class StockTable {
 
 }
+
