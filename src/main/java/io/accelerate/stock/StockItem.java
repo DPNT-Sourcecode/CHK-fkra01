@@ -4,10 +4,10 @@ import java.util.List;
 
 public class StockItem {
 
-  public StockItem(String sku, Integer price, SpecialOffer offer) {
+  public StockItem(String sku, Integer price, List<SpecialOffer> offers) {
     this.sku = sku;
     this.price = price;
-    this.offer = offer;
+    this.offers = offers;
   }
 
   String sku;
@@ -22,10 +22,11 @@ public class StockItem {
     return price;
   }
 
-  SpecialOffer offer;
+  List<SpecialOffer> offers;
 
-  public SpecialOffer getOffer() {
-    return offer;
+  public List<SpecialOffer> getOffers() {
+    return offers;
   }
 
 }
+
