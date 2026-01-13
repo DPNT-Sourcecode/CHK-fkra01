@@ -5,7 +5,9 @@ import io.accelerate.runner.SolutionNotImplementedException;
 public class CheckoutSolution {
 
     public Integer checkout(String skus) {
+        return 0;
 
     }
 }
+
 

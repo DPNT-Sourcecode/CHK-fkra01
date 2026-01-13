@@ -1,6 +1,17 @@
 package io.accelerate.stock;
 
-public class StockTable {
+import java.util.ArrayList;
 
+public class StockTable {
+  ArrayList<StockItem> items = new ArrayList<>();
+
+  public ArrayList<StockItem> getItems() {
+    return items;
+  }
+
+  public void addItem(StockItem item) {
+    items.add(item);
+  }
 }
+
 

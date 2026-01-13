@@ -1,8 +1,15 @@
 package io.accelerate.stock;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StockItem {
+
+  public StockItem(String sku, Integer price, List<SpecialOffer> offers) {
+    this.sku = sku;
+    this.price = price;
+    this.offers = offers;
+  }
+
   String sku;
 
   public String getSku() {
@@ -15,10 +22,11 @@ public class StockItem {
     return price;
   }
 
-  ArrayList<SpecialOffer> offers;
+  List<SpecialOffer> offers;
 
-  public ArrayList<SpecialOffer> getOffers() {
+  public List<SpecialOffer> getOffers() {
     return offers;
   }
 
 }
+
