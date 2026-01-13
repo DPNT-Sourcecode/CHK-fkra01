@@ -27,7 +27,7 @@ public class CheckoutSolution {
             var count = itemCount.getValue();
             if (item.getOffer() != null) {
                 var offerCount = Math.floorDiv(count, item.getOffer().multiple());
-                var regularCount = (count - offerCount);
+                var regularCount = (count - offerCount * item.getOffer().multiple());
                 total += offerCount * item.getOffer().finalPrice();
                 total += regularCount * item.getPrice();
 
@@ -40,3 +40,4 @@ public class CheckoutSolution {
 
     }
 }
+

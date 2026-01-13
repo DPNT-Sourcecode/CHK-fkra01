@@ -16,17 +16,18 @@ public class CheckoutTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"A,50", "B,30", "C,20", "D,15", "AA,100", "BB,60", "CC,40", "AB,80", "ABC,100", "AAA,130", "BB,45", "AAAB,160", "AAABB,175", "AAABBC,195"})
+  @CsvSource({"A,50", "B,30", "C,20", "D,15", "AA,100", "BB,45", "CC,40", "AB,80", "ABC,100", "AAA,130",  "AAAB,160", "AAABB,175", "AAABBC,195"})
   public void testCheckout(String input, Integer expected) {
     var output = solution.checkout(input);
-    assertEquals(expected, output, "Expected: " + expected +" Got: " + output);
+    assertEquals(expected, output);
   }
 
   @ParameterizedTest
   @ValueSource(strings={"E", "", "1"})
   public void testCheckoutInvalid(String input) {
-    assertEquals(-1, input);
+    assertEquals(-1, solution.checkout(input));
 
   }
 
 }
+
