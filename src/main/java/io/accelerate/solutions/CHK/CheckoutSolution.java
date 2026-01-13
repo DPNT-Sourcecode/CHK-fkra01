@@ -2,6 +2,7 @@ package io.accelerate.solutions.CHK;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.accelerate.stock.StockItem;
 import io.accelerate.stock.StockTable;
@@ -31,19 +32,23 @@ public class CheckoutSolution {
             var item = itemCount.getKey();
             var count = itemCount.getValue();
             // var offer = selectOffer(item.getOffers());
-            var offers = item.getOffers().stream().sorted((x, y) -> Integer.compare(x.multiple(), y.multiple()));
+            var offers = item.getOffers().stream()
+                    .sorted((x, y) -> Integer.compare(x.multiple(), y.multiple()))
+                    .collect(Collectors.toList()).reversed();
             if (offers != null) {
-                for (var offer: offers)
-                var offerCount = Math.floorDiv(count, offer.multiple());
-                if (offer.sku().equals(item.getSku())) {
-                    var regularCount = (count - offerCount * offer.multiple());
-                    total += offerCount * offer.finalPrice();
-                    total += regularCount * item.getPrice();
-                } else {
-                    var relevantItem = table.getItem(offer.sku());
-                    total -= offerCount * relevantItem.getPrice();
-                    total += offerCount * offer.finalPrice();
-                    total += count * item.getPrice();
+                for (var offer : offers) {
+                    var offerCount = Math.floorDiv(count, offer.multiple());
+                    if (offer.sku().equals(item.getSku())) {
+                        var regularCount = (count - offerCount * offer.multiple());
+                        total += offerCount * offer.finalPrice();
+                        total += regularCount * item.getPrice();
+                    } else {
+                        var relevantItem = table.getItem(offer.sku());
+                        total -= offerCount * relevantItem.getPrice();
+                        total += offerCount * offer.finalPrice();
+                        total += count * item.getPrice();
+                    }
+
                 }
 
             } else {
@@ -63,5 +68,6 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
