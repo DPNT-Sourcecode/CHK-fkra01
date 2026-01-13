@@ -1,6 +1,7 @@
 package io.accelerate.solutions.CHK;
 
 import java.util.HashMap;
+import java.util.List;
 
 import io.accelerate.stock.StockItem;
 import io.accelerate.stock.StockTable;
@@ -29,11 +30,17 @@ public class CheckoutSolution {
         for (var itemCount : itemCounts.entrySet()) {
             var item = itemCount.getKey();
             var count = itemCount.getValue();
-            if (item.getOffer() != null) {
-                var offerCount = Math.floorDiv(count, item.getOffer().multiple());
-                var regularCount = (count - offerCount * item.getOffer().multiple());
-                total += offerCount * item.getOffer().finalPrice();
-                total += regularCount * item.getPrice();
+            var offer = selectOffer(item.getOffers());
+            if (offer != null) {
+                if (offer.sku().equals(item.getSku())) {
+
+                    var offerCount = Math.floorDiv(count, offer.multiple());
+                    var regularCount = (count - offerCount * offer.multiple());
+                    total += offerCount * offer.finalPrice();
+                    total += regularCount * item.getPrice();
+                } else {
+
+                }
 
             } else {
                 total += count * item.getPrice();
@@ -45,9 +52,11 @@ public class CheckoutSolution {
     }
 
     private SpecialOffer selectOffer(List<SpecialOffer> offers) {
+        return offers.stream().max((x, y) -> Integer.compare(x.multiple(), y.multiple())).get();
     }
 
 }
+
 
 
 
