@@ -12,6 +12,14 @@ public class StockTable {
   public void addItem(StockItem item) {
     items.add(item);
   }
+
+  // Default factory method for the given stock table - likely wouldnt exist in a
+  // real project
+  public static StockTable defaultTable() {
+    var items = List.of();
+
+  }
 }
+
 
 
