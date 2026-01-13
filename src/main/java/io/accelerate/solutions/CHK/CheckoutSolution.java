@@ -54,7 +54,11 @@ public class CheckoutSolution {
     }
 
     private SpecialOffer selectOffer(List<SpecialOffer> offers) {
+        if (offers == null) {
+            return null;
+        }
         return offers.stream().max((x, y) -> Integer.compare(x.multiple(), y.multiple())).get();
     }
 
 }
+
