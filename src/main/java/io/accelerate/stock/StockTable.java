@@ -1,17 +1,19 @@
 package io.accelerate.stock;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class StockTable {
-  ArrayList<StockItem> items = new ArrayList<>();
+  HashMap<String, StockItem> items = new HashMap<>();
 
-  public ArrayList<StockItem> getItems() {
-    return items;
+  public StockItem getItem(String sku) {
+    return items.get(sku);
+
   }
 
   public void addItem(StockItem item) {
-    items.add(item);
+    items.put(item.sku, item);
   }
 
   // Default factory method for the given stock table - likely wouldnt exist in a
@@ -19,10 +21,10 @@ public class StockTable {
   public static StockTable defaultTable() {
     var items = List.of(
 
-        new StockItem("A", 50, List.of(new SpecialOffer(3, 130))),
-        new StockItem("B", 30, List.of(new SpecialOffer(2, 45))),
-        new StockItem("C", 20, List.of()),
-        new StockItem("D", 15, List.of())
+        new StockItem("A", 50, new SpecialOffer(3, 130)),
+        new StockItem("B", 30, new SpecialOffer(2, 45)),
+        new StockItem("C", 20, null),
+        new StockItem("D", 15, null)
 
     );
     // Definitely cleaner ways to do this, but this isnt "production" code
@@ -34,3 +36,4 @@ public class StockTable {
 
   }
 }
+

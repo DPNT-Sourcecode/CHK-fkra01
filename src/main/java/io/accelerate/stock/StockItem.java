@@ -4,7 +4,7 @@ import java.util.List;
 
 public class StockItem {
 
-  public StockItem(String sku, Integer price, SpecialOffer offers) {
+  public StockItem(String sku, Integer price, SpecialOffer offer) {
     this.sku = sku;
     this.price = price;
     this.offer = offer;
@@ -29,4 +29,5 @@ public class StockItem {
   }
 
 }
+
 
