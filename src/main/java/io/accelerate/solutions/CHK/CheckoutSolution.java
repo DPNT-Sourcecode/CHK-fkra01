@@ -45,6 +45,7 @@ public class CheckoutSolution {
                         offerCount = Integer.min(offerCount, itemCounts.getOrDefault(relevantItem, 0));
                         total -= offerCount * relevantItem.getPrice();
                         total += offerCount * offer.finalPrice();
+                        total += offerCount * offer.multiple() * item.getPrice();
                     }
                     count -= (offerCount * offer.multiple());
 
@@ -65,6 +66,7 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
 
