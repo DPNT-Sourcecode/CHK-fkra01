@@ -86,7 +86,7 @@ public class CheckoutSolution {
                                             }
                                             var availableCount = 0;
                                             if (offerItem.getSku().equals(itemSku)) {
-                                                availableCount = Integer.min(count, offer.multiple() - availableCount);
+                                                availableCount = Integer.min(count, offer.multiple() - multipleCount);
                                                 count -= availableCount;
                                             } else {
                                                 availableCount = Integer.min(
@@ -142,4 +142,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
