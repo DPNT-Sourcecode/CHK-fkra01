@@ -32,10 +32,13 @@ public class CheckoutSolution {
 
         HashMap<StockItem, Integer> accountedFor = new HashMap<>();
 
-        for (var itemCount : itemCounts.entrySet()) {
-            var item = itemCount.getKey();
-            var count = itemCount.getValue() - accountedFor.getOrDefault(item, 0);
-            // var offer = selectOffer(item.getOffers());
+        for (var itemSku : table.getProcessingOrder()) {
+            var item = table.getItem(itemSku);
+            var count = itemCounts.getOrDefault(item, 0) - accountedFor.getOrDefault(item, 0);
+            if (count == 0) {
+                continue;
+            }
+            var countFlag = true;
             if (item.getOffers() != null) {
                 var offers = item.getOffers().stream()
                         .sorted((x, y) -> Integer.compare(x.multiple(), y.multiple()))
@@ -44,23 +47,29 @@ public class CheckoutSolution {
                     var offerCount = Math.floorDiv(count, offer.multiple());
                     if (offer.sku().equals(item.getSku())) {
                         total += offerCount * offer.finalPrice();
+                        count -= (offerCount * offer.multiple());
                     } else {
                         var relevantItem = table.getItem(offer.sku());
                         offerCount = Integer.min(offerCount, itemCounts.getOrDefault(relevantItem, 0));
-                        var oldAccounted = accountedFor.putIfAbsent(relevantItem, offerCount);
+                        if (offerCount == 0) {
+
+                            var oldAccounted = accountedFor.putIfAbsent(relevantItem, offerCount);
                         if (oldAccounted != null) {
                             accountedFor.put(relevantItem, oldAccounted + offerCount);
                         }
 
                         total += offerCount * offer.finalPrice();
                         total += offerCount * offer.multiple() * item.getPrice();
-                    }
-                    count -= (offerCount * offer.multiple());
+
+                        }
+                                            }
 
                 }
 
             }
+            if (countFlag = true) {
             total += count * item.getPrice();
+            }
         }
         return total;
 
@@ -74,3 +83,4 @@ public class CheckoutSolution {
     }
 
 }
+
