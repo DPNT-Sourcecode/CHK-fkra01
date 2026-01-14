@@ -66,6 +66,26 @@ public class CheckoutSolution {
                                 count -= (offerCount * offer.multiple());
 
                             } else {
+                                var totalCount = getSubCounts(itemCounts, offer.grouped());
+                                offerCount = Math.floorDiv(totalCount, offer.multiple());
+                                var multipleCount = 0;
+                                while (offerCount > 0) {
+                                    if (multipleCount == offer.multiple()) {
+                                        offerCount -= 1;
+                                        multipleCount = 0;
+                                    } else {
+                                        for (var offerItemSku : offer.grouped()) {
+                                            if (offerItemSku.equals(itemSku)) {
+
+                                            } else {
+
+                                                var offerItem = table.getItem(offerItemSku);
+                                            }
+
+                                        }
+                                    }
+
+                                }
 
                             }
                         }
@@ -100,3 +120,4 @@ public class CheckoutSolution {
     }
 
 }
+
