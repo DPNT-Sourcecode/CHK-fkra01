@@ -53,6 +53,9 @@ public class CheckoutSolution {
                                     count -= offer.selfNumAffected();
                                     total += offer.finalPrice();
                                     selfCount -= offer.multiple();
+                                    if (selfCount % 2 != 0) {
+                                        selfCount += 1;
+                                    }
                                 }
                             }
 
@@ -91,3 +94,4 @@ public class CheckoutSolution {
     }
 
 }
+
