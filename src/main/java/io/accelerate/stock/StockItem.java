@@ -4,10 +4,17 @@ import java.util.List;
 
 public class StockItem {
 
-  public StockItem(String sku, Integer price, List<SpecialOffer> offers) {
+  public StockItem(String sku, Integer price, List<SpecialOffer> offers, List<String> dependents) {
     this.sku = sku;
     this.price = price;
     this.offers = offers;
+    this.dependents = dependents;
+  }
+
+  List<String> dependents;
+
+  public List<String> getDependents() {
+    return dependents;
   }
 
   String sku;
@@ -29,3 +36,4 @@ public class StockItem {
   }
 
 }
+
