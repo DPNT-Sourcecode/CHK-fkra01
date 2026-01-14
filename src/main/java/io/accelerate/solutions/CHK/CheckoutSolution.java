@@ -34,7 +34,7 @@ public class CheckoutSolution {
         for (var itemSku : table.getProcessingOrder()) {
             var item = table.getItem(itemSku);
             var count = itemCounts.getOrDefault(item, 0) - accountedFor.getOrDefault(item, 0);
-            if (count == 0) {
+            if (count <= 0) {
                 continue;
             }
             if (item.getOffers() != null) {
@@ -76,6 +76,9 @@ public class CheckoutSolution {
                                         total += offer.finalPrice();
                                     } else {
                                         for (var offerItemSku : offer.grouped()) {
+                                            if (multipleCount >= offer.multiple()) {
+                                                break;
+                                            }
                                             var availableCount = 0;
                                             StockItem offerItem = item;
                                             if (offerItemSku.equals(itemSku)) {
@@ -83,12 +86,14 @@ public class CheckoutSolution {
                                                 count -= availableCount;
                                             } else {
                                                 offerItem = table.getItem(offerItemSku);
-                                                availableCount = Integer.min(itemCounts.get(offerItem),
+                                                availableCount = Integer.min(
+                                                        itemCounts.get(offerItem)
+                                                                - accountedFor.getOrDefault(offerItem, 0),
                                                         offer.multiple());
-                                                var oldAccounted = accountedFor.putIfAbsent(offerItem, offerCount);
-                                                if (oldAccounted != null) {
-                                                    accountedFor.put(offerItem, oldAccounted + offerCount);
-                                                }
+                                            }
+                                            var oldAccounted = accountedFor.putIfAbsent(offerItem, availableCount);
+                                            if (oldAccounted != null) {
+                                                accountedFor.put(offerItem, oldAccounted + availableCount);
                                             }
                                             multipleCount += availableCount;
 
@@ -130,3 +135,4 @@ public class CheckoutSolution {
     }
 
 }
+
