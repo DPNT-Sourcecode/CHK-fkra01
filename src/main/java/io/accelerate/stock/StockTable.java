@@ -55,7 +55,7 @@ public class StockTable {
             null),
         new StockItem("I", 35, null, null),
         new StockItem("J", 60, null, null),
-        new StockItem("K", 80, List.of(new SpecialOffer(2, "K", 150, null, null)), null),
+        new StockItem("K", 70, List.of(new SpecialOffer(2, "K", 120, null, null)), null),
         new StockItem("L", 90, null, null),
         new StockItem("M", 15, null, null),
         new StockItem("N", 40, List.of(new SpecialOffer(3, "M", 0, null, null)), List.of("M")),
@@ -85,6 +85,7 @@ public class StockTable {
 
   }
 }
+
 
 
 
