@@ -46,7 +46,11 @@ public class CheckoutSolution {
                     if (offer.sku().equals(item.getSku())) {
                         if (offer.selfNumAffected() != null) {
                             while (offerCount > 0) {
-
+                                if (count > offer.multiple()) {
+                                    total += offerCount * offer.finalPrice();
+                                    count -= offer.selfNumAffected();
+                                }
+                                offerCount -= 1;
                             }
 
                         } else {
@@ -84,4 +88,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
