@@ -60,8 +60,13 @@ public class CheckoutSolution {
                             }
 
                         } else {
-                            total += offerCount * offer.finalPrice();
-                            count -= (offerCount * offer.multiple());
+                            if (offer.grouped() == null) {
+
+                                total += offerCount * offer.finalPrice();
+                                count -= (offerCount * offer.multiple());
+                            } else {
+
+                            }
                         }
                     } else {
                         var relevantItem = this.table.getItem(offer.sku());
@@ -94,4 +99,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
