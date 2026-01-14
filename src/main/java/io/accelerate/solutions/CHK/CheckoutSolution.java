@@ -87,7 +87,7 @@ public class CheckoutSolution {
                                             } else {
                                                 offerItem = table.getItem(offerItemSku);
                                                 availableCount = Integer.min(
-                                                        itemCounts.get(offerItem)
+                                                        itemCounts.getOrDefault(offerItem, 0)
                                                                 - accountedFor.getOrDefault(offerItem, 0),
                                                         offer.multiple());
                                             }
@@ -136,5 +136,6 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
