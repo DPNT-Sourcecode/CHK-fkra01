@@ -45,8 +45,10 @@ public class CheckoutSolution {
                     var offerCount = Math.floorDiv(count, offer.multiple());
                     if (offer.sku().equals(item.getSku())) {
                         if (offer.selfNumAffected() != null) {
-                            total += offerCount * offer.finalPrice();
-                            count -= offer.selfNumAffected() * offer.multiple();
+                            while (offerCount > 0) {
+
+                            }
+
                         } else {
                             total += offerCount * offer.finalPrice();
                             count -= (offerCount * offer.multiple());
@@ -82,3 +84,4 @@ public class CheckoutSolution {
     }
 
 }
+
