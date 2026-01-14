@@ -44,8 +44,12 @@ public class CheckoutSolution {
                 for (var offer : offers) {
                     var offerCount = Math.floorDiv(count, offer.multiple());
                     if (offer.sku().equals(item.getSku())) {
-                        total += offerCount * offer.finalPrice();
-                        count -= (offerCount * offer.multiple());
+                        if (offer.selfNumAffected() != null) {
+                            count -= offer.selfNumAffected();
+                        } else {
+                            total += offerCount * offer.finalPrice();
+                            count -= (offerCount * offer.multiple());
+                        }
                     } else {
                         var relevantItem = this.table.getItem(offer.sku());
                         offerCount = Integer.min(offerCount, itemCounts.getOrDefault(relevantItem, 0));
@@ -63,7 +67,7 @@ public class CheckoutSolution {
                 }
 
             }
-                total += count * item.getPrice();
+            total += count * item.getPrice();
         }
         return total;
 
@@ -77,4 +81,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
