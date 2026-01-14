@@ -69,31 +69,37 @@ public class CheckoutSolution {
                                 var totalCount = getSubCounts(itemCounts, accountedFor, offer.grouped());
                                 offerCount = Math.floorDiv(totalCount, offer.multiple());
                                 var multipleCount = 0;
+                                var groupedItems = offer.grouped().stream()
+                                        .map((x) -> table.getItem(x))
+                                        .sorted((x, y) -> Integer.compare(x.getPrice(), y.getPrice()))
+                                        .collect(Collectors.toList()).reversed();
+
                                 while (offerCount > 0) {
                                     if (multipleCount >= offer.multiple()) {
                                         offerCount -= 1;
                                         multipleCount -= offer.multiple();
                                         total += offer.finalPrice();
                                     } else {
-                                        for (var offerItemSku : offer.grouped()) {
+                                        for (var offerItem : groupedItems) {
                                             if (multipleCount >= offer.multiple()) {
                                                 break;
                                             }
                                             var availableCount = 0;
-                                            StockItem offerItem = item;
-                                            if (offerItemSku.equals(itemSku)) {
-                                                availableCount = Integer.min(count, offer.multiple());
+                                            if (offerItem.getSku().equals(itemSku)) {
+                                                availableCount = Integer.min(count, offer.multiple() - availableCount);
                                                 count -= availableCount;
                                             } else {
-                                                offerItem = table.getItem(offerItemSku);
                                                 availableCount = Integer.min(
                                                         itemCounts.getOrDefault(offerItem, 0)
                                                                 - accountedFor.getOrDefault(offerItem, 0),
-                                                        offer.multiple());
+                                                        offer.multiple() - multipleCount);
                                             }
-                                            var oldAccounted = accountedFor.putIfAbsent(offerItem, availableCount);
-                                            if (oldAccounted != null) {
-                                                accountedFor.put(offerItem, oldAccounted + availableCount);
+                                            if (availableCount != 0) {
+
+                                                var oldAccounted = accountedFor.putIfAbsent(offerItem, availableCount);
+                                                if (oldAccounted != null) {
+                                                    accountedFor.put(offerItem, oldAccounted + availableCount);
+                                                }
                                             }
                                             multipleCount += availableCount;
 
@@ -136,3 +142,4 @@ public class CheckoutSolution {
     }
 
 }
+
