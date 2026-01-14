@@ -14,7 +14,6 @@ public class CheckoutSolution {
     public Integer checkout(String skus) {
 
         HashMap<StockItem, Integer> itemCounts = new HashMap<>();
-        System.out.println(skus);
         if (skus == "") {
             return 0;
         }
@@ -49,10 +48,9 @@ public class CheckoutSolution {
                         total += offerCount * offer.finalPrice();
                         count -= (offerCount * offer.multiple());
                     } else {
-                        var relevantItem = table.getItem(offer.sku());
+                        var relevantItem = this.table.getItem(offer.sku());
                         offerCount = Integer.min(offerCount, itemCounts.getOrDefault(relevantItem, 0));
-                        if (offerCount == 0) {
-
+                        if (offerCount != 0) {
                             var oldAccounted = accountedFor.putIfAbsent(relevantItem, offerCount);
                             if (oldAccounted != null) {
                                 accountedFor.put(relevantItem, oldAccounted + offerCount);
@@ -83,5 +81,6 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
