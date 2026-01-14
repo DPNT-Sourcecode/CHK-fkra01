@@ -6,4 +6,3 @@ public record SpecialOffer(Integer multiple, String sku, Integer finalPrice, Int
     List<String> grouped) {
 
 }
-

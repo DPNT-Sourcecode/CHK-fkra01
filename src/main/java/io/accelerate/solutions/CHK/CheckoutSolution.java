@@ -93,11 +93,10 @@ public class CheckoutSolution {
     }
 
     private Integer getSubCounts(HashMap<StockItem, Integer> itemCounts, List<String> skus) {
-        return itemCounts.entrySet().stream().filter((x) -> skus.contains(x.getKey().getSku())).map((x) -> x.getValue())
+        return itemCounts.entrySet().stream()
+                .filter((x) -> skus.contains(x.getKey().getSku()))
+                .map((x) -> x.getValue())
                 .reduce(0, (acc, x) -> acc + x);
     }
 
 }
-
-
-
