@@ -47,7 +47,27 @@ public class StockTable {
         new StockItem("C", 20, null, null),
         new StockItem("D", 15, null, null),
         new StockItem("E", 40, List.of(new SpecialOffer(2, "B", 0, null)), List.of("B")),
-        new StockItem("F", 10, List.of(new SpecialOffer(2, "F", 0, 1)), null)
+        new StockItem("F", 10, List.of(new SpecialOffer(2, "F", 0, 1)), null),
+        new StockItem("G", 0, null, null),
+        new StockItem("H", 0, List.of(new SpecialOffer(5, "H", 45, null), new SpecialOffer(10, "H", 80, 0)), null),
+        new StockItem("I", 0, null, null),
+        new StockItem("J", 0, null, null),
+        new StockItem("K", 0, List.of(new SpecialOffer(2, "K", 150, null)), null),
+        new StockItem("L", 0, null, null),
+        new StockItem("M", 0, null, null),
+        new StockItem("N", 0, List.of(new SpecialOffer(3, "M", 0, null)), List.of("M")),
+        new StockItem("O", 0, null, null),
+        new StockItem("P", 0, List.of(new SpecialOffer(5, "P", 200, null)), null),
+        new StockItem("Q", 0, List.of(new SpecialOffer(3, "Q", 80, null)), null),
+        new StockItem("R", 0, List.of(new SpecialOffer(3, "Q", 0, null)), List.of("Q")),
+        new StockItem("S", 0, null, null),
+        new StockItem("T", 0, null, null),
+        new StockItem("U", 0, List.of(new SpecialOffer(3, "U", 0, 1)), null),
+        new StockItem("V", 0, List.of(new SpecialOffer(2, "V", 90, null), new SpecialOffer(3, "V", 130, null)), null),
+        new StockItem("W", 0, null, null),
+        new StockItem("X", 0, null, null),
+        new StockItem("Y", 0, null, null),
+        new StockItem("Z", 50, null, null)
 
     );
     // Definitely cleaner ways to do this, but this isnt "production" code
@@ -59,3 +79,4 @@ public class StockTable {
 
   }
 }
+
