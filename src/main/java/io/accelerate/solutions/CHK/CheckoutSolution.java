@@ -37,7 +37,6 @@ public class CheckoutSolution {
             if (count == 0) {
                 continue;
             }
-            var countFlag = true;
             if (item.getOffers() != null) {
                 var offers = item.getOffers().stream()
                         .sorted((x, y) -> Integer.compare(x.multiple(), y.multiple()))
@@ -58,16 +57,13 @@ public class CheckoutSolution {
                             total += offerCount * offer.finalPrice();
                             total += offerCount * offer.multiple() * item.getPrice();
                             count -= (offerCount * offer.multiple());
-                            countFlag = false;
                         }
                     }
 
                 }
 
             }
-            if (countFlag) {
                 total += count * item.getPrice();
-            }
         }
         return total;
 
@@ -81,3 +77,4 @@ public class CheckoutSolution {
     }
 
 }
+
