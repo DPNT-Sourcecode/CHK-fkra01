@@ -1,5 +1,6 @@
 package io.accelerate.stock;
 
-public record SpecialOffer(Integer multiple, String sku, Integer finalPrice) {
+public record SpecialOffer(Integer multiple, String sku, Integer finalPrice, int selfNumAffected) {
 
 }
+
