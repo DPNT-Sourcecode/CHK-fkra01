@@ -27,7 +27,7 @@ public class StockTable {
     var independents = this.items
         .values()
         .stream()
-        .filter((x) -> !dependents.contains(x))
+        .filter((x) -> !dependents.contains(x.getSku()))
         .map((x) -> x.getSku())
         .collect(Collectors.toList());
     out.addAll(independents);
@@ -57,4 +57,5 @@ public class StockTable {
 
   }
 }
+
 
