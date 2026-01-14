@@ -64,6 +64,7 @@ public class CheckoutSolution {
 
                                 total += offerCount * offer.finalPrice();
                                 count -= (offerCount * offer.multiple());
+
                             } else {
 
                             }
@@ -91,13 +92,12 @@ public class CheckoutSolution {
 
     }
 
-    private SpecialOffer selectOffer(List<SpecialOffer> offers) {
-        if (offers == null) {
-            return null;
-        }
-        return offers.stream().max((x, y) -> Integer.compare(x.multiple(), y.multiple())).get();
+    private Integer getSubCounts(HashMap<StockItem, Integer> itemCounts, List<String> skus) {
+        return itemCounts.entrySet().stream().filter((x) -> skus.contains(x.getKey().getSku())).map((x) -> x.getValue())
+                .reduce(0, (acc, x) -> acc + x);
     }
 
 }
+
 
 
