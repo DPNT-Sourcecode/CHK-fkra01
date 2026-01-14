@@ -66,7 +66,7 @@ public class CheckoutSolution {
                                 count -= (offerCount * offer.multiple());
 
                             } else {
-                                var totalCount = getSubCounts(itemCounts, offer.grouped());
+                                var totalCount = getSubCounts(itemCounts, accountedFor, offer.grouped());
                                 offerCount = Math.floorDiv(totalCount, offer.multiple());
                                 var multipleCount = 0;
                                 while (offerCount > 0) {
@@ -127,12 +127,14 @@ public class CheckoutSolution {
 
     }
 
-    private Integer getSubCounts(HashMap<StockItem, Integer> itemCounts, List<String> skus) {
+    private Integer getSubCounts(HashMap<StockItem, Integer> itemCounts, HashMap<StockItem, Integer> accountedFor,
+            List<String> skus) {
         return itemCounts.entrySet().stream()
                 .filter((x) -> skus.contains(x.getKey().getSku()))
-                .map((x) -> x.getValue())
+                .map((x) -> x.getValue() - accountedFor.getOrDefault(x.getKey(), 0))
                 .reduce(0, (acc, x) -> acc + x);
     }
 
 }
+
 

@@ -64,7 +64,7 @@ public class StockTable {
         new StockItem("Q", 30, List.of(new SpecialOffer(3, "Q", 80, null, null)), null),
         new StockItem("R", 50, List.of(new SpecialOffer(3, "Q", 0, null, null)), List.of("Q")),
         new StockItem("S", 20, List.of(new SpecialOffer(3, "S", 45, null, List.of("S", "T", "X", "Y", "Z"))), null),
-        new StockItem("T", 20, List.of(new SpecialOffer(3, "S", 45, null, List.of("S", "T", "X", "Y", "Z"))), null),
+        new StockItem("T", 20, List.of(new SpecialOffer(3, "T", 45, null, List.of("S", "T", "X", "Y", "Z"))), null),
         new StockItem("U", 40, List.of(new SpecialOffer(3, "U", 0, 1, null)), null),
         new StockItem("V", 50,
             List.of(new SpecialOffer(2, "V", 90, null, null), new SpecialOffer(3, "V", 130, null, null)),
@@ -85,5 +85,6 @@ public class StockTable {
 
   }
 }
+
 
 
