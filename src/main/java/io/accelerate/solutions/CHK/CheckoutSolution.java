@@ -54,21 +54,21 @@ public class CheckoutSolution {
                         if (offerCount == 0) {
 
                             var oldAccounted = accountedFor.putIfAbsent(relevantItem, offerCount);
-                        if (oldAccounted != null) {
-                            accountedFor.put(relevantItem, oldAccounted + offerCount);
+                            if (oldAccounted != null) {
+                                accountedFor.put(relevantItem, oldAccounted + offerCount);
+                            }
+                            total += offerCount * offer.finalPrice();
+                            total += offerCount * offer.multiple() * item.getPrice();
+                            count -= (offerCount * offer.multiple());
+                            countFlag = false;
                         }
-
-                        total += offerCount * offer.finalPrice();
-                        total += offerCount * offer.multiple() * item.getPrice();
-
-                        }
-                                            }
+                    }
 
                 }
 
             }
-            if (countFlag = true) {
-            total += count * item.getPrice();
+            if (countFlag) {
+                total += count * item.getPrice();
             }
         }
         return total;
@@ -83,4 +83,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
