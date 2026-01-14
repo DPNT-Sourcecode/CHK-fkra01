@@ -70,17 +70,27 @@ public class CheckoutSolution {
                                 offerCount = Math.floorDiv(totalCount, offer.multiple());
                                 var multipleCount = 0;
                                 while (offerCount > 0) {
-                                    if (multipleCount == offer.multiple()) {
+                                    if (multipleCount >= offer.multiple()) {
                                         offerCount -= 1;
-                                        multipleCount = 0;
+                                        multipleCount -= offer.multiple();
+                                        total += offer.finalPrice();
                                     } else {
                                         for (var offerItemSku : offer.grouped()) {
+                                            var availableCount = 0;
+                                            StockItem offerItem = item;
                                             if (offerItemSku.equals(itemSku)) {
-
+                                                availableCount = Integer.min(count, offer.multiple());
+                                                count -= availableCount;
                                             } else {
-
-                                                var offerItem = table.getItem(offerItemSku);
+                                                offerItem = table.getItem(offerItemSku);
+                                                availableCount = Integer.min(itemCounts.get(offerItem),
+                                                        offer.multiple());
+                                                var oldAccounted = accountedFor.putIfAbsent(offerItem, offerCount);
+                                                if (oldAccounted != null) {
+                                                    accountedFor.put(offerItem, oldAccounted + offerCount);
+                                                }
                                             }
+                                            multipleCount += availableCount;
 
                                         }
                                     }
@@ -120,4 +130,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
