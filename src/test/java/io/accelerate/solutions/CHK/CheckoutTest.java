@@ -19,19 +19,18 @@ public class CheckoutTest {
   @CsvSource({ "A,50", "B,30", "C,20", "D,15", "AA,100", "BB,45", "CC,40", "AB,80", "ABC,100", "AAA,130", "AAAB,160",
       "AAABB,175", "AAABBC,195", "AAAAA,200", "AAAAAA,250", "EEB,80", "EE,80", "EEEEBB,160", "BEBEEE,160",
       "ABCDEABCDE,280", "EEEB,120", "ABCDECBAABCABBAAAEEAA,665", "F,10", "FF,20", "FFF,20", "FFFF,30", "FFFFF,40",
-      "FFFFFF,40" })
+      "FFFFFF,40", "H,10", "HHHHH,45", "HHHHHHHHHH,80", "K,80", "KK,150", "KKK,230", "KKKK,300", "NNN,120", "NNNM,120",
+      "NNNMM,135" })
   public void testCheckout(String input, Integer expected) {
     var output = solution.checkout(input);
     assertEquals(expected, output);
   }
 
   @ParameterizedTest
-  @ValueSource(strings = { "Z", "", "1" })
+  @ValueSource(strings = { "", "1" })
   public void testCheckoutInvalid(String input) {
     assertEquals(-1, solution.checkout(input));
 
   }
 
 }
-
-
